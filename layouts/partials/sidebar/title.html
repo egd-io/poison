@@ -4,18 +4,21 @@
             <a href="{{ .Site.BaseURL }}">
                 <img src="{{ .Site.Params.remote_brand_image }}" alt="brand image">
             </a>
-        {{ else if .Site.Params.brand_image }}
+        {{ else if .Site.Params.logo }}
             <a href="{{ .Site.BaseURL }}">
-                <img src="{{ .Site.Params.brand_image }}" alt="brand image">
+                <img src="{{ .Site.Params.logo }}" alt="brand image">
             </a>
         {{ end }}
-        {{ if .Site.Params.brand }}
+        {{ if .Site.Title }}
             <a href="{{ .Site.BaseURL }}">
-                <h1>{{ .Site.Params.brand }}</h1>
+                <h1>{{ .Site.Title }}</h1>
             </a>
         {{ end }}
     </h1>
     <p class="lead">
     {{ with .Site.Params.description }}{{. | safeHTML}}{{end}}
+    </p>
+    <p class="sub-heading">
+    {{ with .Site.Params.sub_description }}{{. | safeHTML}}{{end}}
     </p>
 </div>
