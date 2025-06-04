@@ -300,6 +300,7 @@ img {
 .page-title,
 .post-title {
   margin-top: 0;
+  font-family: abril fatface,serif;
 }
 
 /* Meta data line below post title */

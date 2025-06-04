@@ -2,8 +2,13 @@
   <h1 class="post-title">
     <a href="{{ .Permalink }}">{{ .Title }}</a>
   </h1>
+  
+  {{ if .Params.description }}
+  <h4>{{ .Params.description }}</h4>
+  {{ end }}
 
   <div class="headline">
+    {{if eq .Section "posts"}}
     <div>
       {{ with .Params.author }}
         {{ with site.Taxonomies.author.Get . }}
@@ -17,17 +22,8 @@
         {{ .Date.Format "January 2, 2006" }}
       </time>
       {{ end }}
-      <span> - </span>
-      <span class="reading-time">
-        {{ if gt .ReadingTime 1 }}
-          {{ .Scratch.Set "readingTime" "mins" }}
-        {{ else }}
-          {{ .Scratch.Set "readingTime" "min" }}
-        {{ end }}
-
-        <span>{{ .ReadingTime }} {{ .Scratch.Get "readingTime" }} read</span>
-      </span>
     </div>
+    {{ end }}
 
     {{ if .Params.tags }}
     <ul class="tags">
