@@ -1,0 +1,62 @@
+{{- $authorEmail := "" }}
+{{- with site.Params.author }}
+  {{- if reflect.IsMap . }}
+    {{- with .email }}
+      {{- $authorEmail = . }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+
+{{- $authorName := "" }}
+{{- with site.Params.author }}
+  {{- if reflect.IsMap . }}
+    {{- with .name }}
+      {{- $authorName = . }}
+    {{- end }}
+  {{- else }}
+    {{- $authorName  = . }}
+  {{- end }}
+{{- end }}
+
+{{- $pctx := . }}
+{{- if .IsHome }}{{ $pctx = .Site }}{{ end }}
+{{- $pages := slice }}
+{{- if or $.IsHome $.IsSection }}
+{{- $pages = $pctx.RegularPages }}
+{{- else }}
+{{- $pages = $pctx.Pages }}
+{{- end }}
+{{- $limit := .Site.Config.Services.RSS.Limit }}
+{{- if ge $limit 1 }}
+{{- $pages = $pages | first $limit }}
+{{- end }}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\"?>" | safeHTML }}
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>{{ if eq .Title .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{ . }} on {{ end }}{{ .Site.Title }}{{ end }}</title>
+  <subtitle>{{ .Site.Params.description }}</subtitle>
+  <link href="{{ .Permalink }}" rel="self" type="text/html"/>
+  <updated>{{ now.Format "2006-01-02T15:04:05Z07:00" }}</updated>
+  <id>{{ .Site.BaseURL }}</id>
+  <author>{{ with $authorName }}
+    <name>{{ . }}{{ end }}</name>{{ with $authorEmail }}
+    <email>{{ . }}{{ end }}</email>
+  </author>
+  <generator>Hugo</generator>{{ with .Site.Copyright }}
+  <rights>{{ . | plainify }}</rights>{{ end }}
+    {{- range $pages }}
+    {{- if eq .Section "posts" }}
+  <entry>
+    <title>{{ .Title }}</title>
+    <link href="{{ .Permalink }}" />
+    <id>{{ .Permalink }}</id>
+    <updated>{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}</updated>
+    <author>{{ with $authorName }}
+      <name>{{ . }}{{ end }}</name>{{ with $authorEmail }}
+      <email>{{ . }}{{ end }}</email>
+     </author>
+    <summary type="html">{{ .Params.description | transform.XMLEscape | safeHTML }}</summary>
+    <content type="html">{{ printf "<![CDATA[ %s ]]>" .Content | safeHTML }}</content>
+  </entry>
+  {{- end }}
+  {{- end }}
+</feed>
