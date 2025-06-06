@@ -204,11 +204,11 @@ body > .wrapper {
     display: none;
 }
 .newsletters label {
-    margin: 0.25rem 1rem 0.25rem 0;
+    margin: 0.25rem 0.25rem 0.25rem 0;
     text-align: center;
 }
 .newsletters input {
-    margin: 0.25rem 1rem 0.25rem 0;
+    margin: 0.25rem;
     font-size: 0.75rem;
     padding: 0.25rem 0.5rem;
     border: 1px solid var(--text-color);
@@ -226,7 +226,7 @@ body > .wrapper {
     font-family: inherit;
     font-size: 0.85rem;
     cursor: pointer;
-    margin: 0.25rem 0;
+    margin: 0.25rem;
 }
 .tags {
     padding-left: 0em;

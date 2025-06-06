@@ -14,8 +14,8 @@
             {{ .Content }}
         {{ end }}
     {{ end }}
-    {{ if (.Site.Params.listmonk) }}
-        {{ partial "post/listmonk_email_newsletters.html" . }}
+    {{ if (.Site.Params.followit) }}
+        {{ partial "post/newsletter_form.html" . }}
     {{ end }}
 </div>
 {{ end }}
