@@ -1,0 +1,9 @@
+<hr>
+<div class="newsletters">
+    <form id="email-subscription-form" method="post" action="{{ .Site.Params.newsletter.followit_host }}/{{ .Site.Params.newsletter.followit_endpoint }}/{{ .Site.Params.newsletter.followit_subscription_list_uiid }}">
+        <label for="email-subscription-input">{{ .Site.Params.newsletter.followit_sidebar_form_text | default "Subscribe to my newsletters" }}</label>
+        <input type="email" id="email-subscription-input" name="email" placeholder="{{ .Site.Params.newsletter.followit_email_placeholder }}" />
+        <button type="submit">Subscribe</button>
+    </form>
+</div>
+<hr>

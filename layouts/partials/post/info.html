@@ -8,7 +8,7 @@
   {{ end }}
 
   <div class="headline">
-    {{if eq .Section "posts"}}
+    {{ if eq .Section "posts" }}
     <div>
       {{ with .Params.author }}
         {{ with site.Taxonomies.author.Get . }}
