@@ -200,7 +200,7 @@ body > .wrapper {
     justify-content: center;
     flex-flow: row wrap;
 }
-.newsletters .email-subscription-form-hide {
+.newsletters .sidebar-subscription-form-hide .post-subscription-form-hide {
     display: none;
 }
 .newsletters label {
