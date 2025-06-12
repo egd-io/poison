@@ -1,9 +1,69 @@
 <hr>
 <div class="newsletters">
-    <form id="email-subscription-form" method="post" action="/.netlify/functions/create-subscriber">
+    <div class="help-block-for-success"></div>
+    <div class="help-block-for-error"></div>
+    <form id="email-subscription-form">
         <label for="email-subscription-input">{{ .Site.Params.newsletter.sidebar_form_label | default "Subscribe to my newsletters" }}</label>
         <input type="email" id="email-subscription-input" name="email" placeholder="{{ .Site.Params.newsletter.form_email_placeholder }}" />
         <button type="submit">Subscribe</button>
     </form>
 </div>
 <hr>
+<script>
+    const successMessage = {{ .Site.Params.listmonk_subscription_success_message | default "Thanks for subscribing" }};
+    const errorMessage = {{ .Site.Params.listmonk_subcription_error_message | default "Sorry, something went wrong. Please, try again" }};
+    const okMessage = {{ .Site.Params.newsletter.200_kit_message }};
+    const createdMessage = {{ .Site.Params.newsletter.201_kit_message }};
+    const unauthzMessage = {{ .Site.Params.newsletter.401_kit_message }};
+    const notFoundMessage = {{ .Site.Params.newsletter.404_kit_message }};
+    const unprocessableEntityMessage = {{ .Site.Params.newsletter.422_kit_message }};
+    const form = document.getElementById("email-subscription-form");
+    
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const email = form.querySelector("#email-subscription-input").value;
+      const referrer = document.URL
+      const data = {
+        email: email,
+        referrer: referrer
+      };
+      fetch("/.netlify/functions/create-subscriber", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+        }).then((response) => {
+          if (response.status === 200) {
+            const successBlock = document.getElementsByClassName('help-block-for-success')[0];
+            successBlock.classList.add('help-block-show');
+            successBlock.textContent = okMessage;
+            document.getElementById('email-subscription-form').classList.add('email-subscription-form-hide');
+          } else if (response.status === 201) {
+            const successBlock = document.getElementsByClassName('help-block-for-success')[0];
+            successBlock.classList.add('help-block-show');
+            successBlock.textContent = createdMessage;
+            document.getElementById('email-subscription-form').classList.add('email-subscription-form-hide');
+          }
+          else if (response.status === 401) {
+            const errorBlock = document.getElementsByClassName('help-block-for-error')[0];
+            errorBlock.classList.add('help-block-show');
+            errorBlock.textContent = unauthzMessage;
+          }
+          else if (response.status === 404) {
+            const errorBlock = document.getElementsByClassName('help-block-for-error')[0];
+            errorBlock.classList.add('help-block-show');
+            errorBlock.textContent = notFoundMessage;
+          }
+          else if (response.status === 422) {
+            const errorBlock = document.getElementsByClassName('help-block-for-error')[0];
+            errorBlock.classList.add('help-block-show');
+            errorBlock.textContent = unprocessableEntityMessage;
+          }
+        }).catch(() => {
+          const errorBlock = document.getElementsByClassName('help-block-for-error')[0];
+          errorBlock.classList.add('help-block-show');
+          errorBlock.textContent = notFoundMessage;
+        });
+      })
+</script>
