@@ -23,16 +23,16 @@
       const referrer = document.URL
       console.log(email)
       console.log(referrer)
-      const data = {
+      const data = JSON.stringify({
         email: email,
         referrer: referrer
-      };
+      });
       fetch("/.netlify/functions/create-subscriber", {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(data),
+        body: data,
         }).then((response) => {
           if (response.status === 200) {
             const successBlock = document.getElementsByClassName('help-block-for-success')[0];
@@ -66,4 +66,5 @@
           errorBlock.textContent = notFoundMessage;
         });
       })
+      console.log(data)
 </script>
