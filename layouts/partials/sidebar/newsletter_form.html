@@ -21,13 +21,11 @@
       e.preventDefault();
       const email = sidebarForm.querySelector("#sidebar-subscription-input").value;
       const referrer = document.URL
-      console.log(email)
-      console.log(referrer)
       const data = JSON.stringify({
         email: email,
         referrer: referrer
       })
-      console.log(data);
+      console.log("Sending the following: " + data);
       fetch("/.netlify/functions/create-subscriber", {
         method: 'POST',
         headers: {
