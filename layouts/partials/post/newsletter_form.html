@@ -1,6 +1,6 @@
 <hr>
 <div class="newsletters">
-    <form id="email-subscription-form" method="post" action="/.netlify/functions/submission-created">
+    <form id="email-subscription-form" method="post" action="/.netlify/functions/create-subscriber">
         <label for="email-subscription-input">{{ .Site.Params.newsletter.post_form_label | default "Subscribe to my newsletters" }}</label>
         <input type="email" id="email-subscription-input" name="email" placeholder="{{ .Site.Params.newsletter.form_email_placeholder }}" />
         <button type="submit">Subscribe</button>
