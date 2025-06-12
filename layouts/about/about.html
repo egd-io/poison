@@ -14,7 +14,7 @@
             {{ .Content }}
         {{ end }}
     {{ end }}
-    {{ if (.Site.Params.followit) }}
+    {{ if (.Site.Params.newsletter.enable) }}
         {{ partial "post/newsletter_form.html" . }}
     {{ end }}
 </div>
