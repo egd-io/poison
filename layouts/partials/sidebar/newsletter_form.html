@@ -10,9 +10,9 @@
 </div>
 <hr>
 <script>
-    const createdMessage = {{ .Site.Params.newsletter.created_kit_message }};
-    const generalErrorMessage = {{ .Site.Params.newsletter.general_error_kit_message }};
-    const unprocessableEntityMessage = {{ .Site.Params.newsletter.unprocessable_entity_kit_message }};
+    const createdMessageSidebar = {{ .Site.Params.newsletter.created_kit_message }};
+    const generalErrorMessageSidebar = {{ .Site.Params.newsletter.general_error_kit_message }};
+    const unprocessableEntityMessageSidebar = {{ .Site.Params.newsletter.unprocessable_entity_kit_message }};
     const sidebarForm = document.getElementById("sidebar-subscription-form");
     
     sidebarForm.addEventListener('submit', (e) => {
@@ -34,18 +34,18 @@
           if (response.status === 201) {
             const successBlock = document.getElementsByClassName('sidebar-help-block-for-success')[0];
             successBlock.classList.add('sidebar-help-block-show');
-            successBlock.textContent = createdMessage;
+            successBlock.textContent = createdMessageSidebar;
             document.getElementById('sidebar-subscription-form').classList.add('sidebar-subscription-form-hide', 'post-subscription-form-hide');
           }
           else if (response.status === 422) {
             const errorBlock = document.getElementsByClassName('sidebar-help-block-for-error')[0];
             errorBlock.classList.add('sidebar-help-block-show');
-            errorBlock.textContent = unprocessableEntityMessage;
+            errorBlock.textContent = unprocessableEntityMessageSidebar;
           }
         }).catch(() => {
           const errorBlock = document.getElementsByClassName('sidebar-help-block-for-error')[0];
           errorBlock.classList.add('sidebar-help-block-show');
-          errorBlock.textContent = generalErrorMessage;
+          errorBlock.textContent = generalErrorMessageSidebar;
         });
       })
 </script>

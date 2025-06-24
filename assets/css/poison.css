@@ -179,19 +179,19 @@ body > .wrapper {
     color: gray;
     font-style: italic;
 }
-.newsletters .help-block-for-success {
+.newsletters .sidebar-help-block-for-success .post-help-block-for-success {
     display: none;
     margin: 0.25rem 1rem 0.25rem 0;
     text-align: center;
     color: green;
 }
-.newsletters .help-block-for-error {
+.newsletters .sidebar-help-block-for-success .post-help-block-for-success {
     display: none;
     margin: 0.25rem 1rem 0.25rem 0;
     text-align: center;
     color: #de0928;
 }
-.newsletters .help-block-show {
+.newsletters .sidebar-help-block-for-success .post-help-block-for-success {
     display: block;
 }
 .newsletters form {
