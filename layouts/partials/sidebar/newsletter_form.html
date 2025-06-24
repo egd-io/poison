@@ -10,10 +10,8 @@
 </div>
 <hr>
 <script>
-    const okMessage = {{ .Site.Params.newsletter.ok_kit_message }};
     const createdMessage = {{ .Site.Params.newsletter.created_kit_message }};
-    const unauthzMessage = {{ .Site.Params.newsletter.unauthz_kit_message }};
-    const notFoundMessage = {{ .Site.Params.newsletter.not_found_kit_message }};
+    const generalErrorMessage = {{ .Site.Params.newsletter.general_error_kit_message }};
     const unprocessableEntityMessage = {{ .Site.Params.newsletter.unprocessable_entity_kit_message }};
     const sidebarForm = document.getElementById("sidebar-subscription-form");
     
@@ -33,26 +31,11 @@
         },
         body: data,
         }).then((response) => {
-          if (response.status === 200) {
-            const successBlock = document.getElementsByClassName('help-block-for-success')[0];
-            successBlock.classList.add('help-block-show');
-            successBlock.textContent = okMessage;
-            document.getElementById('sidebar-subscription-form').classList.add('sidebar-subscription-form-hide', 'post-subscription-form-hide');
-          } else if (response.status === 201) {
+          if (response.status === 201) {
             const successBlock = document.getElementsByClassName('help-block-for-success')[0];
             successBlock.classList.add('help-block-show');
             successBlock.textContent = createdMessage;
             document.getElementById('sidebar-subscription-form').classList.add('sidebar-subscription-form-hide', 'post-subscription-form-hide');
-          }
-          else if (response.status === 401) {
-            const errorBlock = document.getElementsByClassName('help-block-for-error')[0];
-            errorBlock.classList.add('help-block-show');
-            errorBlock.textContent = unauthzMessage;
-          }
-          else if (response.status === 404) {
-            const errorBlock = document.getElementsByClassName('help-block-for-error')[0];
-            errorBlock.classList.add('help-block-show');
-            errorBlock.textContent = notFoundMessage;
           }
           else if (response.status === 422) {
             const errorBlock = document.getElementsByClassName('help-block-for-error')[0];
@@ -62,7 +45,7 @@
         }).catch(() => {
           const errorBlock = document.getElementsByClassName('help-block-for-error')[0];
           errorBlock.classList.add('help-block-show');
-          errorBlock.textContent = notFoundMessage;
+          errorBlock.textContent = generalErrorMessage;
         });
       })
 </script>
