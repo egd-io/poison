@@ -14,8 +14,8 @@
     const unprocessableEntityMessagePost = {{ .Site.Params.newsletter.unprocessable_entity_kit_message }};
     const postForm = document.getElementById("post-subscription-form");
     
-    postForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+    postForm.addEventListener('submit', (pf) => {
+      pf.preventDefault();
       const email = postForm.querySelector("#post-subscription-input").value;
       const referrer = document.URL
       const data = JSON.stringify({

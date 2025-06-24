@@ -15,8 +15,8 @@
     const unprocessableEntityMessageSidebar = {{ .Site.Params.newsletter.unprocessable_entity_kit_message }};
     const sidebarForm = document.getElementById("sidebar-subscription-form");
     
-    sidebarForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+    sidebarForm.addEventListener('submit', (sf) => {
+      sf.preventDefault();
       const email = sidebarForm.querySelector("#sidebar-subscription-input").value;
       const referrer = document.URL
       const data = JSON.stringify({
