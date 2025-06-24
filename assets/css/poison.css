@@ -185,13 +185,13 @@ body > .wrapper {
     text-align: center;
     color: green;
 }
-.newsletters .sidebar-help-block-for-success .post-help-block-for-success {
+.newsletters .sidebar-help-block-for-error .post-help-block-for-error {
     display: none;
     margin: 0.25rem 1rem 0.25rem 0;
     text-align: center;
     color: #de0928;
 }
-.newsletters .sidebar-help-block-for-success .post-help-block-for-success {
+.newsletters .sidebar-help-block-show .post-help-block-show {
     display: block;
 }
 .newsletters form {
