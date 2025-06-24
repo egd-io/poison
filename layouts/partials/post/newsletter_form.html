@@ -1,14 +1,13 @@
 <hr>
 <div class="newsletters">
-    <div class="help-block-for-success"></div>
-    <div class="help-block-for-error"></div>
+    <div class="post-help-block-for-success"></div>
+    <div class="post-help-block-for-error"></div>
     <form id="post-subscription-form">
         <label for="post-subscription-input">{{ .Site.Params.newsletter.post_form_label | default "Subscribe to my newsletters" }}</label>
         <input type="email" id="post-subscription-input" name="email" placeholder="{{ .Site.Params.newsletter.form_email_placeholder }}" />
         <button type="submit">Subscribe</button>
     </form>
 </div>
-<hr>
 <script>
     const createdMessage = {{ .Site.Params.newsletter.created_kit_message }};
     const generalErrorMessage = {{ .Site.Params.newsletter.general_error_kit_message }};
@@ -32,19 +31,19 @@
         body: data,
         }).then((response) => {
           if (response.status === 201) {
-            const successBlock = document.getElementsByClassName('help-block-for-success')[0];
-            successBlock.classList.add('help-block-show');
+            const successBlock = document.getElementsByClassName('post-help-block-for-success')[0];
+            successBlock.classList.add('post-help-block-show');
             successBlock.textContent = createdMessage;
             document.getElementById('post-subscription-form').classList.add('post-subscription-form-hide', 'post-subscription-form-hide');
           }
           else if (response.status === 422) {
-            const errorBlock = document.getElementsByClassName('help-block-for-error')[0];
-            errorBlock.classList.add('help-block-show');
+            const errorBlock = document.getElementsByClassName('post-help-block-for-error')[0];
+            errorBlock.classList.add('post-help-block-show');
             errorBlock.textContent = unprocessableEntityMessage;
           }
         }).catch(() => {
-          const errorBlock = document.getElementsByClassName('help-block-for-error')[0];
-          errorBlock.classList.add('help-block-show');
+          const errorBlock = document.getElementsByClassName('post-help-block-for-error')[0];
+          errorBlock.classList.add('post-help-block-show');
           errorBlock.textContent = generalErrorMessage;
         });
       })

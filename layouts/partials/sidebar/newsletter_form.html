@@ -1,7 +1,7 @@
 <hr>
 <div class="newsletters">
-    <div class="help-block-for-success"></div>
-    <div class="help-block-for-error"></div>
+    <div class="sidebar-help-block-for-success"></div>
+    <div class="sidebar-help-block-for-error"></div>
     <form id="sidebar-subscription-form">
         <label for="sidebar-subscription-input">{{ .Site.Params.newsletter.sidebar_form_label | default "Subscribe to my newsletters" }}</label>
         <input type="email" id="sidebar-subscription-input" name="email" placeholder="{{ .Site.Params.newsletter.form_email_placeholder }}" />
@@ -32,19 +32,19 @@
         body: data,
         }).then((response) => {
           if (response.status === 201) {
-            const successBlock = document.getElementsByClassName('help-block-for-success')[0];
-            successBlock.classList.add('help-block-show');
+            const successBlock = document.getElementsByClassName('sidebar-help-block-for-success')[0];
+            successBlock.classList.add('sidebar-help-block-show');
             successBlock.textContent = createdMessage;
             document.getElementById('sidebar-subscription-form').classList.add('sidebar-subscription-form-hide', 'post-subscription-form-hide');
           }
           else if (response.status === 422) {
-            const errorBlock = document.getElementsByClassName('help-block-for-error')[0];
-            errorBlock.classList.add('help-block-show');
+            const errorBlock = document.getElementsByClassName('sidebar-help-block-for-error')[0];
+            errorBlock.classList.add('sidebar-help-block-show');
             errorBlock.textContent = unprocessableEntityMessage;
           }
         }).catch(() => {
-          const errorBlock = document.getElementsByClassName('help-block-for-error')[0];
-          errorBlock.classList.add('help-block-show');
+          const errorBlock = document.getElementsByClassName('sidebar-help-block-for-error')[0];
+          errorBlock.classList.add('sidebar-help-block-show');
           errorBlock.textContent = generalErrorMessage;
         });
       })
