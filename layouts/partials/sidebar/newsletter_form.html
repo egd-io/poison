@@ -35,7 +35,7 @@
             const successBlock = document.getElementsByClassName('sidebar-help-block-for-success')[0];
             successBlock.classList.add('sidebar-help-block-show');
             successBlock.textContent = createdMessageSidebar;
-            document.getElementById('sidebar-subscription-form').classList.add('sidebar-subscription-form-hide', 'post-subscription-form-hide');
+            document.getElementById('sidebar-subscription-form').classList.add('sidebar-subscription-form-hide');
           }
           else if (response.status === 422) {
             const errorBlock = document.getElementsByClassName('sidebar-help-block-for-error')[0];
