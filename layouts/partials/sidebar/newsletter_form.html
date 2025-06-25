@@ -1,9 +1,7 @@
 <hr>
 <div class="newsletters">
-    <div class="sidebar-help-block-for-success"></div>
-    <div class="sidebar-help-block-for-error"></div>
     <form id="sidebar-subscription-form">
-        <label for="sidebar-subscription-input">{{ .Site.Params.newsletter.sidebar_form_label | default "Subscribe to my newsletters" }}</label>
+        <label id="sidebar-label" for="sidebar-subscription-input">{{ .Site.Params.newsletter.sidebar_form_label | default "Subscribe to my newsletters" }}</label>
         <input type="email" id="sidebar-subscription-input" name="email" placeholder="{{ .Site.Params.newsletter.form_email_placeholder }}" />
         <button type="submit">Subscribe</button>
     </form>
@@ -14,6 +12,7 @@
     const generalErrorMessageSidebar = {{ .Site.Params.newsletter.general_error_kit_message }};
     const unprocessableEntityMessageSidebar = {{ .Site.Params.newsletter.unprocessable_entity_kit_message }};
     const sidebarForm = document.getElementById("sidebar-subscription-form");
+    const sidebarLabel = document.getElementById("sidebar-label")
     
     sidebarForm.addEventListener('submit', (sf) => {
       sf.preventDefault();
@@ -32,20 +31,16 @@
         body: data,
         }).then((response) => {
           if (response.status === 201) {
-            const successBlock = document.getElementsByClassName('sidebar-help-block-for-success')[0];
-            successBlock.classList.add('sidebar-help-block-show');
-            successBlock.textContent = createdMessageSidebar;
-            document.getElementById('sidebar-subscription-form').classList.add('sidebar-subscription-form-hide');
+            sidebarLabel.textContent = createdMessageSidebar
+            sidebarLabel.style.color = "green"
           }
           else if (response.status === 422) {
-            const errorBlock = document.getElementsByClassName('sidebar-help-block-for-error')[0];
-            errorBlock.classList.add('sidebar-help-block-show');
-            errorBlock.textContent = unprocessableEntityMessageSidebar;
+            sidebarLabel.textContent = unprocessableEntityMessageSidebar
+            sidebarLabel.style.color = "red"
           }
         }).catch(() => {
-          const errorBlock = document.getElementsByClassName('sidebar-help-block-for-error')[0];
-          errorBlock.classList.add('sidebar-help-block-show');
-          errorBlock.textContent = generalErrorMessageSidebar;
+          sidebarLabel.textContent = generalErrorMessageSidebar
+          sidebarLabel.style.color = "red"
         });
       })
 </script>
