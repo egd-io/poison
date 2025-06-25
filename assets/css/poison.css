@@ -179,29 +179,11 @@ body > .wrapper {
     color: gray;
     font-style: italic;
 }
-.newsletters .sidebar-help-block-for-success .post-help-block-for-success {
-    display: none;
-    margin: 0.25rem 1rem 0.25rem 0;
-    text-align: center;
-    color: green;
-}
-.newsletters .sidebar-help-block-for-error .post-help-block-for-error {
-    display: none;
-    margin: 0.25rem 1rem 0.25rem 0;
-    text-align: center;
-    color: #de0928;
-}
-.newsletters .sidebar-help-block-show .post-help-block-show {
-    display: block;
-}
 .newsletters form {
     display: flex;
     align-content: center;
     justify-content: center;
     flex-flow: row wrap;
-}
-.newsletters .sidebar-subscription-form-hide .post-subscription-form-hide {
-    display: none;
 }
 .newsletters label {
     margin: 0.25rem 0.25rem 0.25rem 0;

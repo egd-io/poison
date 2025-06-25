@@ -1,21 +1,21 @@
 <hr>
 <div class="newsletters">
-    <div class="post-help-block-for-success"></div>
-    <div class="post-help-block-for-error"></div>
     <form id="post-subscription-form">
-        <label for="post-subscription-input">{{ .Site.Params.newsletter.post_form_label | default "Subscribe to my newsletters" }}</label>
+        <label id="post-label" for="post-subscription-input">{{ .Site.Params.newsletter.post_form_label | default "Subscribe to my newsletters" }}</label>
         <input type="email" id="post-subscription-input" name="email" placeholder="{{ .Site.Params.newsletter.form_email_placeholder }}" />
         <button type="submit">Subscribe</button>
     </form>
 </div>
+
 <script>
     const createdMessagePost = {{ .Site.Params.newsletter.created_kit_message }};
     const generalErrorMessagePost = {{ .Site.Params.newsletter.general_error_kit_message }};
     const unprocessableEntityMessagePost = {{ .Site.Params.newsletter.unprocessable_entity_kit_message }};
     const postForm = document.getElementById("post-subscription-form");
+    const postLabel = document.getElementById("post-label")
     
     postForm.addEventListener('submit', (pf) => {
-      pf.preventDefault();
+      sf.preventDefault();
       const email = postForm.querySelector("#post-subscription-input").value;
       const referrer = document.URL
       const data = JSON.stringify({
@@ -31,20 +31,16 @@
         body: data,
         }).then((response) => {
           if (response.status === 201) {
-            const successBlock = document.getElementsByClassName('post-help-block-for-success')[0];
-            successBlock.classList.add('post-help-block-show');
-            successBlock.textContent = createdMessagePost;
-            document.getElementById('post-subscription-form').classList.add('post-subscription-form-hide');
+            postLabel.textContent = createdMessagePost
+            postLabel.style.color = "green"
           }
           else if (response.status === 422) {
-            const errorBlock = document.getElementsByClassName('post-help-block-for-error')[0];
-            errorBlock.classList.add('post-help-block-show');
-            errorBlock.textContent = unprocessableEntityMessagePost;
+            postLabel.textContent = unprocessableEntityMessagePost
+            postLabel.style.color = "red"
           }
         }).catch(() => {
-          const errorBlock = document.getElementsByClassName('post-help-block-for-error')[0];
-          errorBlock.classList.add('post-help-block-show');
-          errorBlock.textContent = generalErrorMessagePost;
+          postLabel.textContent = generalErrorMessagePost
+          postLabel.style.color = "red"
         });
       })
 </script>
