@@ -15,7 +15,7 @@
     const postLabel = document.getElementById("post-label")
     
     postForm.addEventListener('submit', (pf) => {
-      sf.preventDefault();
+      pf.preventDefault();
       const email = postForm.querySelector("#post-subscription-input").value;
       const referrer = document.URL
       const data = JSON.stringify({
