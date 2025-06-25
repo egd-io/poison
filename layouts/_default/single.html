@@ -2,7 +2,7 @@
 <div class="post">
   {{ partial "post/info.html" . }}
   {{ .Content }}
-  {{ if (.Site.Params.newsletter.followit) }}
+  {{ if (.Site.Params.newsletter.enable) }}
     {{ partial "post/newsletter_form.html" . }}
   {{ end }}
   {{ partial "post/navigation.html" . }}

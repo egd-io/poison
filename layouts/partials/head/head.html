@@ -20,9 +20,6 @@
         {{ printf `<link rel=%q type=%q href=%q title=%q>` .Rel .MediaType.Type .Permalink site.Title | safeHTML }}
     {{ end }}
 
-    <!-- verifications -->
-    <meta name="follow.it-verification-code" content="{{ .Site.Params.newsletter.followit_verification_code }}"/>
-
     <!-- META -->
     {{ partial "head/meta.html" . }}
 

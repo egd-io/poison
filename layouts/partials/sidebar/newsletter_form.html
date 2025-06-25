@@ -1,9 +1,46 @@
 <hr>
 <div class="newsletters">
-    <form id="email-subscription-form" method="post" action="{{ .Site.Params.newsletter.followit_host }}/{{ .Site.Params.newsletter.followit_endpoint }}/{{ .Site.Params.newsletter.followit_subscription_list_uiid }}">
-        <label for="email-subscription-input">{{ .Site.Params.newsletter.followit_sidebar_form_text | default "Subscribe to my newsletters" }}</label>
-        <input type="email" id="email-subscription-input" name="email" placeholder="{{ .Site.Params.newsletter.followit_email_placeholder }}" />
+    <form id="sidebar-subscription-form">
+        <label id="sidebar-label" for="sidebar-subscription-input">{{ .Site.Params.newsletter.sidebar_form_label | default "Subscribe to my newsletters" }}</label>
+        <input type="email" id="sidebar-subscription-input" name="email" placeholder="{{ .Site.Params.newsletter.form_email_placeholder }}" />
         <button type="submit">Subscribe</button>
     </form>
 </div>
 <hr>
+<script>
+    const createdMessageSidebar = {{ .Site.Params.newsletter.created_kit_message }};
+    const generalErrorMessageSidebar = {{ .Site.Params.newsletter.general_error_kit_message }};
+    const unprocessableEntityMessageSidebar = {{ .Site.Params.newsletter.unprocessable_entity_kit_message }};
+    const sidebarForm = document.getElementById("sidebar-subscription-form");
+    const sidebarLabel = document.getElementById("sidebar-label")
+    
+    sidebarForm.addEventListener('submit', (sf) => {
+      sf.preventDefault();
+      const email = sidebarForm.querySelector("#sidebar-subscription-input").value;
+      const referrer = document.URL
+      const data = JSON.stringify({
+        email: email,
+        referrer: referrer
+      })
+      console.log("Sending the following: " + data);
+      fetch("/.netlify/functions/create-subscriber", {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: data,
+        }).then((response) => {
+          if (response.status === 201) {
+            sidebarLabel.textContent = createdMessageSidebar
+            sidebarLabel.style.color = "green"
+          }
+          else if (response.status === 422) {
+            sidebarLabel.textContent = unprocessableEntityMessageSidebar
+            sidebarLabel.style.color = "red"
+          }
+        }).catch(() => {
+          sidebarLabel.textContent = generalErrorMessageSidebar
+          sidebarLabel.style.color = "red"
+        });
+      })
+</script>

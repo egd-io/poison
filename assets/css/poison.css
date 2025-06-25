@@ -179,29 +179,11 @@ body > .wrapper {
     color: gray;
     font-style: italic;
 }
-.newsletters .help-block-for-success {
-    display: none;
-    margin: 0.25rem 1rem 0.25rem 0;
-    text-align: center;
-    color: green;
-}
-.newsletters .help-block-for-error {
-    display: none;
-    margin: 0.25rem 1rem 0.25rem 0;
-    text-align: center;
-    color: #de0928;
-}
-.newsletters .help-block-show {
-    display: block;
-}
 .newsletters form {
     display: flex;
     align-content: center;
     justify-content: center;
     flex-flow: row wrap;
-}
-.newsletters .email-subscription-form-hide {
-    display: none;
 }
 .newsletters label {
     margin: 0.25rem 0.25rem 0.25rem 0;
